@@ -1,0 +1,17 @@
+CHIP Dmux4way {
+    IN in, sel[2];
+    OUT a, b, c, d;
+
+    PARTS:
+    Not(in=sel[0], out=notSel0);
+    Not(in=sel[1], out=notSel1);
+    And(a=in, b=notSel0, out=ns2);
+    And(a=ns2, b=notSel1, out=a);
+
+    And(a=in, b=sel[0], out=b);
+
+    And(a=in, b=notSel1, out=c);
+
+    And(a=in, b=sel[0], out=ns3);
+    And(a=ns3, b=sel[1], out=d);
+}
